@@ -1,0 +1,175 @@
+﻿<Window x:Class="RestaurantManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantManagementSystem"
+        mc:Ignorable="d"
+        Icon="/Images/restaurant.png"
+        Title="Restaurant Menagment Application" MinHeight="800" MinWidth="1400" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <Style x:Key="HoverButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#69bddc"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="0" Background="#2596be">
+            
+            <StackPanel>
+                <Image Width="100" Height="100" Margin="20">
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="300" UriSource="/Images/logo.png"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock Text="Restaurant Menagment System" 
+                           Foreground="Black" TextAlignment="Center" FontSize="15" Margin="5"/>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Center">
+                <Button VerticalAlignment="Bottom" x:Name="btnHome" Style="{StaticResource HoverButtonStyle}"
+Click="btnHome_Click" Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Home.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Home" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button VerticalAlignment="Bottom" x:Name="btnCategories" Style="{StaticResource HoverButtonStyle}"
+Click="btnCategories_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Categories.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Kategorije" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            <Button VerticalAlignment="Bottom" x:Name="btnProducts" Style="{StaticResource HoverButtonStyle}"
+Click="btnProducts_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Products.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Proizvodi" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button VerticalAlignment="Bottom" x:Name="btnTables" Style="{StaticResource HoverButtonStyle}"
+Click="btnTables_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Chair.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Stolovi" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button VerticalAlignment="Bottom" x:Name="btnStaff" Style="{StaticResource HoverButtonStyle}"
+Click="btnStaff_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Employees.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Osoblje" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button VerticalAlignment="Bottom" x:Name="btnPOS" Style="{StaticResource HoverButtonStyle}"
+Click="btnPOS_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Payment.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Plaćanja" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button VerticalAlignment="Bottom" x:Name="btnKitchen" Style="{StaticResource HoverButtonStyle}"
+Click="btnKitchen_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Kitchen.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Kuhinja" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button VerticalAlignment="Bottom" x:Name="btnLogout" Style="{StaticResource HoverButtonStyle}"
+Click="btnLogout_Click"  Background="Transparent" BorderThickness="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="30">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/turnOff.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="Logout" FontSize="20" Margin="15"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#dddddd" Height="50" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="tbOption" Text="" FontSize="20" Margin="10" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="tbDate" Text="" FontSize="20" Margin="10" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="tbUser" Text="" FontSize="20" Margin="10" HorizontalAlignment="Right" Grid.Column="1"/>
+            </Grid>
+            <Frame x:Name="showPage" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Window>

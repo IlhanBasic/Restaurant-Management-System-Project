@@ -1,0 +1,67 @@
+﻿<Window x:Class="RestaurantManagementSystem.changeProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantManagementSystem"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        WindowStartupLocation="CenterScreen"
+        Title="Promena proizvoda"
+        Width="450" MinHeight="600" MinWidth="1200" MaxHeight="600" MaxWidth="1200">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" Background="#2596be">
+            <Image Width="50" Margin="20" HorizontalAlignment="Left">
+                <Image.Source>
+                    <BitmapImage DecodePixelWidth="300" UriSource="/Images/Edit.png"/>
+                </Image.Source>
+            </Image>
+            <TextBlock Text="Izmeni proizvod" FontSize="20" VerticalAlignment="Center" FontWeight="Bold"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15" Width="350">
+
+            <TextBlock Text="Ime:" FontSize="20" Margin="20,10,20,0" HorizontalAlignment="Center" />
+            <TextBox x:Name="tbIme" Text="{Binding Product.nameArticle}" Width="300" FontSize="20" Margin="20,0,20,10" Padding="10"/>
+
+            <TextBlock Text="Kategorija:" FontSize="20" Margin="20,20,20,0" HorizontalAlignment="Center" />
+            <ComboBox x:Name="cbCateg" ItemsSource="{Binding productCategory}" Width="300" FontSize="20" Margin="20,0,20,10" SelectionChanged="cbCateg_SelectionChanged"/>
+
+            <TextBlock Text="Aktivan" FontSize="20" Margin="20,20,20,0" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <RadioButton Content="DA" GroupName="ProizvodStatus" FontSize="20" Margin="10,0" Checked="RadioButton_Checked"/>
+                <RadioButton Content="NE" GroupName="ProizvodStatus" FontSize="20" Margin="10,0" Checked="RadioButton_Checked"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15" Width="350">
+            <Image x:Name="SelectedImage" Width="200" Height="200" Margin="20"/>
+            <Button Content="Izaberi sliku" FontSize="20" Margin="20,10,20,0" Click="SelectImage_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15" Width="350">
+            <TextBlock Text="Kolicina:" FontSize="20" Margin="20,10,20,0" HorizontalAlignment="Center" />
+            <TextBox x:Name="tbQuantity" Text="{Binding Product.quantityArticle}" Width="300" FontSize="20" Margin="20,0,20,10" Padding="10" />
+
+            <TextBlock Text="Cena:" FontSize="20" Margin="20,10,20,0" HorizontalAlignment="Center" />
+            <TextBox x:Name="tbPrice" Text="{Binding Product.priceArticle}"  Width="300" FontSize="20" Margin="20,0,20,10" Padding="10"/>
+
+            <TextBlock Text="Jedinica Mere:" FontSize="20" Margin="20,10,20,0" HorizontalAlignment="Center" />
+            <TextBox x:Name="tbUnit" Text="{Binding Product.unitArticle}"  Width="300" FontSize="20" Margin="20,0,20,10" Padding="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+            <Button Content="Potvrdi" Style="{StaticResource ConfirmButtonStyle}" x:Name="btnSumbit" Click="btnSumbit_Click"/>
+            <Button Content="Izlaz" Style="{StaticResource ExitButtonStyle}" x:Name="btnFold" Click="btnFold_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

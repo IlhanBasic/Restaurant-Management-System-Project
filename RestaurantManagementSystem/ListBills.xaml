@@ -1,0 +1,49 @@
+﻿<Window x:Class="RestaurantManagementSystem.ListBills"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantManagementSystem"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        WindowStartupLocation="CenterScreen"
+        Title="Lista računa" MinHeight="450" MinWidth="800" MaxHeight="450" MaxWidth="800">
+    <Grid>
+        <DataGrid x:Name="dgListBIlls" ItemsSource="{Binding Bills}" AutoGenerateColumns="False" Margin="0,20" 
+          Background="White" CanUserAddRows="False" HeadersVisibility="Column" CellEditEnding="DataGrid_CellEditEnding">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#2596be" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Broj Računa" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Sto" Binding="{Binding Reservation.C_Table.NameTab}" Width="auto"/>
+                <DataGridTextColumn Header="Konobar" Binding="{Binding Reservation.Staff.Person.PersonName}" Width="Auto"/>
+                <DataGridTextColumn Header="Mušterija" Binding="{Binding Reservation.Guest.Person.PersonName}" Width="Auto"/>
+                <DataGridTextColumn Header="Vreme" Binding="{Binding Reservation.Datum}" Width="Auto"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding StatusBill}" Width="Auto"/>
+                <DataGridTemplateColumn Header="Akcije" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="btnCard" Click="btnCard_Click" Width="40" Height="40" BorderThickness="0" Background="Transparent" Margin="0 0 10 0">
+                                    <Image Source="/Images/Payment.png" Width="40" Height="40"/>
+                                </Button>
+                                <Button x:Name="btnCache" Click="btnCache_Click" Width="40" Height="40" BorderThickness="0" Background="Transparent">
+                                    <Image Source="/Images/money.png" Width="40" Height="40"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

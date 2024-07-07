@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestaurantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_Table">
+          <Key>
+            <PropertyRef Name="IdTab" />
+          </Key>
+          <Property Name="IdTab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameTab" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="idArticle" />
+          </Key>
+          <Property Name="idArticle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameArticle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="priceArticle" Type="float" Nullable="false" />
+          <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="quantityArticle" Type="float" Nullable="false" />
+          <Property Name="unitArticle" Type="varchar" MaxLength="10" />
+          <Property Name="activityArticle" Type="bit" Nullable="false" />
+          <Property Name="imageArticle" Type="varbinary(max)" />
+          <Property Name="idRestaurant" Type="int" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdReservation" Type="int" Nullable="false" />
+          <Property Name="StatusBill" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BillItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameProduct" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PriceProduct" Type="float" Nullable="false" />
+          <Property Name="QuantityProduct" Type="float" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="BillId" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IdCat" />
+          </Key>
+          <Property Name="IdCat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCat" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+          <Property Name="idRestaurant" Type="int" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTable" Type="int" Nullable="false" />
+          <Property Name="IdWaiter" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+          <Property Name="IdCustomer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="WorkTime" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="idStaff" />
+          </Key>
+          <Property Name="idStaff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeStaff" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="shiftStaff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeStaff">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Name="idType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameType" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uPass" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="uName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uPhone" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Article__categor__45F365D3">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IdCat" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__IdReservat__534D60F1">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="IdReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillItem__BillId__5629CD9C">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="BillItem" Type="Self.BillItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillItem">
+              <PropertyRef Name="BillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Guest__PersonID__3F466844">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__IdCus__5070F446">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__IdTab__4E88ABD4">
+          <End Role="_Table" Type="Self._Table" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_Table">
+              <PropertyRef Name="IdTab" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__IdWai__4F7CD00D">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdWaiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__WorkT__398D8EEE">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__PersonID__4BAC3F29">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__typeStaff__4AB81AF0">
+          <End Role="TypeStaff" Type="Self.TypeStaff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeStaff">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="typeStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantModelStoreContainer">
+          <EntitySet Name="_Table" EntityType="Self._Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillItem" EntityType="Self.BillItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeStaff" EntityType="Self.TypeStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Article__categor__45F365D3" Association="Self.FK__Article__categor__45F365D3">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__IdReservat__534D60F1" Association="Self.FK__Bill__IdReservat__534D60F1">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillItem__BillId__5629CD9C" Association="Self.FK__BillItem__BillId__5629CD9C">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="BillItem" EntitySet="BillItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Guest__PersonID__3F466844" Association="Self.FK__Guest__PersonID__3F466844">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Guest" EntitySet="Guest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__IdCus__5070F446" Association="Self.FK__Reservati__IdCus__5070F446">
+            <End Role="Guest" EntitySet="Guest" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__IdTab__4E88ABD4" Association="Self.FK__Reservati__IdTab__4E88ABD4">
+            <End Role="_Table" EntitySet="_Table" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__IdWai__4F7CD00D" Association="Self.FK__Reservati__IdWai__4F7CD00D">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__WorkT__398D8EEE" Association="Self.FK__Restauran__WorkT__398D8EEE">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__PersonID__4BAC3F29" Association="Self.FK__Staff__PersonID__4BAC3F29">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__typeStaff__4AB81AF0" Association="Self.FK__Staff__typeStaff__4AB81AF0">
+            <End Role="TypeStaff" EntitySet="TypeStaff" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Restaurant" Association="Self.FK_Article_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Restaurant" Association="Self.FK_Person_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C_Table">
+          <Key>
+            <PropertyRef Name="IdTab" />
+          </Key>
+          <Property Name="IdTab" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameTab" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__IdTab__4E88ABD4" FromRole="C_Table" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="idArticle" />
+          </Key>
+          <Property Name="idArticle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameArticle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="priceArticle" Type="Double" Nullable="false" />
+          <Property Name="categoryID" Type="Int32" Nullable="false" />
+          <Property Name="quantityArticle" Type="Double" Nullable="false" />
+          <Property Name="unitArticle" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="activityArticle" Type="Boolean" Nullable="false" />
+          <Property Name="imageArticle" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idRestaurant" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Article__categor__45F365D3" FromRole="Article" ToRole="Category" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Article_Restaurant" FromRole="Article" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReservation" Type="Int32" Nullable="false" />
+          <Property Name="StatusBill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK__Bill__IdReservat__534D60F1" FromRole="Bill" ToRole="Reservation" />
+          <NavigationProperty Name="BillItems" Relationship="Self.FK__BillItem__BillId__5629CD9C" FromRole="Bill" ToRole="BillItem" />
+        </EntityType>
+        <EntityType Name="BillItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PriceProduct" Type="Double" Nullable="false" />
+          <Property Name="QuantityProduct" Type="Double" Nullable="false" />
+          <Property Name="TotalPrice" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="BillId" Type="Int32" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK__BillItem__BillId__5629CD9C" FromRole="BillItem" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IdCat" />
+          </Key>
+          <Property Name="IdCat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK__Article__categor__45F365D3" FromRole="Category" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Guest__PersonID__3F466844" FromRole="Guest" ToRole="Person" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__IdCus__5070F446" FromRole="Guest" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idRestaurant" Type="Int32" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK__Guest__PersonID__3F466844" FromRole="Person" ToRole="Guest" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__PersonID__4BAC3F29" FromRole="Person" ToRole="Staff" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Person_Restaurant" FromRole="Person" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Restaurants" Relationship="Self.FK__Restauran__WorkT__398D8EEE" FromRole="Place" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTable" Type="Int32" Nullable="false" />
+          <Property Name="IdWaiter" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="C_Table" Relationship="Self.FK__Reservati__IdTab__4E88ABD4" FromRole="Reservation" ToRole="C_Table" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__IdReservat__534D60F1" FromRole="Reservation" ToRole="Bill" />
+          <NavigationProperty Name="Guest" Relationship="Self.FK__Reservati__IdCus__5070F446" FromRole="Reservation" ToRole="Guest" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Reservati__IdWai__4F7CD00D" FromRole="Reservation" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="WorkTime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Restaurant" FromRole="Restaurant" ToRole="Article" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Person_Restaurant" FromRole="Restaurant" ToRole="Person" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Restauran__WorkT__398D8EEE" FromRole="Restaurant" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="idStaff" />
+          </Key>
+          <Property Name="idStaff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeStaff" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="shiftStaff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__Staff__PersonID__4BAC3F29" FromRole="Staff" ToRole="Person" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__IdWai__4F7CD00D" FromRole="Staff" ToRole="Reservation" />
+          <NavigationProperty Name="TypeStaff1" Relationship="Self.FK__Staff__typeStaff__4AB81AF0" FromRole="Staff" ToRole="TypeStaff" />
+        </EntityType>
+        <EntityType Name="TypeStaff">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Name="idType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__typeStaff__4AB81AF0" FromRole="TypeStaff" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Reservati__IdTab__4E88ABD4">
+          <End Role="C_Table" Type="Self.C_Table" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_Table">
+              <PropertyRef Name="IdTab" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Article__categor__45F365D3">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IdCat" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Article_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__IdReservat__534D60F1">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="IdReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillItem__BillId__5629CD9C">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="BillItem" Type="Self.BillItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillItem">
+              <PropertyRef Name="BillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Guest__PersonID__3F466844">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__IdCus__5070F446">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__PersonID__4BAC3F29">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__WorkT__398D8EEE">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__IdWai__4F7CD00D">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdWaiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__typeStaff__4AB81AF0">
+          <End Role="TypeStaff" Type="Self.TypeStaff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeStaff">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="typeStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_Table" EntityType="Self.C_Table" />
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="BillItems" EntityType="Self.BillItem" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Guests" EntityType="Self.Guest" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="TypeStaffs" EntityType="Self.TypeStaff" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Reservati__IdTab__4E88ABD4" Association="Self.FK__Reservati__IdTab__4E88ABD4">
+            <End Role="C_Table" EntitySet="C_Table" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Article__categor__45F365D3" Association="Self.FK__Article__categor__45F365D3">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Restaurant" Association="Self.FK_Article_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__IdReservat__534D60F1" Association="Self.FK__Bill__IdReservat__534D60F1">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillItem__BillId__5629CD9C" Association="Self.FK__BillItem__BillId__5629CD9C">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="BillItem" EntitySet="BillItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Guest__PersonID__3F466844" Association="Self.FK__Guest__PersonID__3F466844">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Guest" EntitySet="Guests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__IdCus__5070F446" Association="Self.FK__Reservati__IdCus__5070F446">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__PersonID__4BAC3F29" Association="Self.FK__Staff__PersonID__4BAC3F29">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Restaurant" Association="Self.FK_Person_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__WorkT__398D8EEE" Association="Self.FK__Restauran__WorkT__398D8EEE">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Restaurant" EntitySet="Restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__IdWai__4F7CD00D" Association="Self.FK__Reservati__IdWai__4F7CD00D">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__typeStaff__4AB81AF0" Association="Self.FK__Staff__typeStaff__4AB81AF0">
+            <End Role="TypeStaff" EntitySet="TypeStaffs" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestaurantModelStoreContainer" CdmEntityContainer="RestaurantEntities">
+          <EntitySetMapping Name="C_Table">
+            <EntityTypeMapping TypeName="RestaurantModel.C_Table">
+              <MappingFragment StoreEntitySet="_Table">
+                <ScalarProperty Name="IdTab" ColumnName="IdTab" />
+                <ScalarProperty Name="NameTab" ColumnName="NameTab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="RestaurantModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="idArticle" ColumnName="idArticle" />
+                <ScalarProperty Name="nameArticle" ColumnName="nameArticle" />
+                <ScalarProperty Name="priceArticle" ColumnName="priceArticle" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="quantityArticle" ColumnName="quantityArticle" />
+                <ScalarProperty Name="unitArticle" ColumnName="unitArticle" />
+                <ScalarProperty Name="activityArticle" ColumnName="activityArticle" />
+                <ScalarProperty Name="imageArticle" ColumnName="imageArticle" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="RestaurantModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
+                <ScalarProperty Name="StatusBill" ColumnName="StatusBill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillItems">
+            <EntityTypeMapping TypeName="RestaurantModel.BillItem">
+              <MappingFragment StoreEntitySet="BillItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="QuantityProduct" ColumnName="QuantityProduct" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="BillId" ColumnName="BillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="RestaurantModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IdCat" ColumnName="IdCat" />
+                <ScalarProperty Name="NameCat" ColumnName="NameCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="RestaurantModel.Guest">
+              <MappingFragment StoreEntitySet="Guest">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="RestaurantModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="RestaurantModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="RestaurantModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="IdWaiter" ColumnName="IdWaiter" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="RestaurantModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="RestaurantModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+                <ScalarProperty Name="typeStaff" ColumnName="typeStaff" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="shiftStaff" ColumnName="shiftStaff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeStaffs">
+            <EntityTypeMapping TypeName="RestaurantModel.TypeStaff">
+              <MappingFragment StoreEntitySet="TypeStaff">
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="nameType" ColumnName="nameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RestaurantModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="uPass" ColumnName="uPass" />
+                <ScalarProperty Name="uName" ColumnName="uName" />
+                <ScalarProperty Name="uPhone" ColumnName="uPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
